@@ -5,12 +5,12 @@
       ],
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "scripts": [
-        "scripts/ol66/fix-slow-dns.sh",
+        "scripts/oel66/repair-slow-dns.sh",
         "scripts/common/sshd.sh",
         "scripts/common/vagrant.sh",
         "scripts/common/vmtools.sh",
         "scripts/common/puppet.sh",
-        "scripts/ol66/cleanup.sh",
+        "scripts/oel66/cleanup.sh",
         "scripts/common/minimize.sh"
       ],
       "type": "shell"
@@ -58,7 +58,7 @@
       ]
     }, {
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ol66-devel/ks.cfg<enter><wait>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/oel66-devel/ks.cfg<enter><wait>"
       ],
       "boot_wait": "10s",
       "disk_size": 20000,
