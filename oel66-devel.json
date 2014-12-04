@@ -8,7 +8,7 @@
         "scripts/oel66/repair-slow-dns.sh",
         "scripts/common/sshd.sh",
         "scripts/common/vagrant.sh",
-        "scripts/common/vmtools.sh",
+        "scripts/common/vboxtools.sh",
         "scripts/common/puppet.sh",
         "scripts/oel66/cleanup.sh",
         "scripts/common/minimize.sh"
@@ -18,7 +18,7 @@
   ],
   "variables": {
     "puppet_version": "provisionerless",
-    "mirror": "http://mirrors.dotsrc.org/"
+    "mirror": "iso"
   },
   "builders": [{
         "name": "oel66-devel-vbox",
@@ -32,7 +32,7 @@
       "http_directory": "http",
       "iso_checksum": "5738f10a506d3630edfd297ef179b553091c6a48",
       "iso_checksum_type": "sha1",
-      "iso_url": "http://mirrors.dotsrc.org/oracle-linux/OL6/U6/x86_64/OracleLinux-R6-U6-Server-x86_64-dvd.iso",
+      "iso_url": "{{user `mirror`}}/OracleLinux-R6-U6-Server-x86_64-dvd.iso",
       "ssh_password": "vagrant",
       "ssh_username": "vagrant",
       "ssh_port": 22,
@@ -60,27 +60,21 @@
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/oel66-devel/ks.cfg<enter><wait>"
       ],
-      "boot_wait": "10s",
+      "boot_wait": "0s",
       "disk_size": 20000,
       "guest_os_type": "Oracle_64",
       "http_directory": "http",
-      "iso_checksum": "14107114f3eece76d16e5ec3fee5f524b09f9829b0ac38474ee676ddd4d2b9c2",
-      "iso_checksum_type": "sha256",
-      "iso_url": "http://mirrors.dotsrc.org/oracle-linux/OL6/U6/x86_64/OracleLinux-R6-U6-Server-x86_64-dvd.iso",
-      "output_directory": "packer-oraclelinux-7.0-x86_64-vmware",
+      "iso_checksum": "5738f10a506d3630edfd297ef179b553091c6a48",
+      "iso_checksum_type": "sha1",
+      "iso_url": "{{user `mirror`}}/OracleLinux-R6-U6-Server-x86_64-dvd.iso",
+      "output_directory": "packer-oraclelinux-6.6-x86_64-virtualbox",
       "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p",
+      "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
-      "ssh_username": "vagrant",
       "ssh_wait_timeout": "10000s",
-      "tools_upload_flavor": "linux",
-      "type": "vmware-iso",
-      "vm_name": "packer-oraclelinux-7.0-x86_64",
-      "vmx_data": {
-        "cpuid.coresPerSocket": "1",
-        "memsize": "480",
-        "numvcpus": "1"
-      }
+      "type": "virtualbox-iso",
+      "vm_name": "packer-oraclelinux-6.6-x86_64"
   }],
   "post-processors": [{
     "type": "vagrant",
